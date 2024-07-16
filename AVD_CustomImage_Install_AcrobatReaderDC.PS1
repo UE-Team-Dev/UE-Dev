@@ -59,13 +59,13 @@ try {
 }
 catch {
     $ErrorMessage = $_.Exception.Message
-    Write-Log "Error downloading $SoftwareName: $ErrorMessage"
+    Write-Log "Error downloading $SoftwareName : $ErrorMessage"
     exit 1
 }
 
 # Run Install Command
 try {
-    Start-Process -FilePath $LocalFilePath -Wait -ArgumentList $CommandLineArgs -ErrorAction Stop
+   # Start-Process -FilePath $LocalFilePath -Wait -ArgumentList $CommandLineArgs -ErrorAction Stop
     if (Test-Path $LocalDetectionExe) {
         Write-Log "$SoftwareName has been installed successfully."
     }
@@ -75,6 +75,6 @@ try {
 }
 catch {
     $ErrorMessage = $_.Exception.Message
-    Write-Log "Error installing $SoftwareName: $ErrorMessage"
+    Write-Log "Error installing $SoftwareName : $ErrorMessage"
     exit 1
 }
