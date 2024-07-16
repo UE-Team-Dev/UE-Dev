@@ -16,7 +16,7 @@
 
 
 Version 0.1 - 07.16.2024
-	- First Draft PoC
+First Draft PoC
 
 
 #>
