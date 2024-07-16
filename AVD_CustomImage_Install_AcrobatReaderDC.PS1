@@ -65,7 +65,7 @@ catch {
 
 # Run Install Command
 try {
-   # Start-Process -FilePath $LocalFilePath -Wait -ArgumentList $CommandLineArgs -ErrorAction Stop
+   Start-Process -FilePath $LocalFilePath -Wait -ArgumentList $CommandLineArgs -ErrorAction Stop
     if (Test-Path $LocalDetectionExe) {
         Write-Log "$SoftwareName has been installed successfully."
     }
