@@ -62,7 +62,7 @@ try {
 catch {
     $ErrorMessage = $_.Exception.Message
     Write-Log "Error downloading $SoftwareName : $ErrorMessage"
-    Write-host "AVD CUSTOM IMAGE TEMPLATE - Error downloading $SoftwareName: $SoftwareName : $((Get-Date).ToUniversalTime()) "
+    Write-host "AVD CUSTOM IMAGE TEMPLATE - Error downloading $SoftwareName : $((Get-Date).ToUniversalTime()) "
     exit 1
 }
 Set-Location $templateFilePathFolder
