@@ -3,7 +3,7 @@
  
  Created on:    07.16.2024
  Created by:    Gian Mattia Lolli
- Version:       0.5
+ Version:       0.6
  Mail:          gianmattia.lolli@4wardpro.it
  
  Function:      Custom install wrapper for AVD Custom Image Templates
@@ -17,9 +17,9 @@
 
 Version 0.1 - 07.16.2024
 	First Draft PoC
-Version 0.5 - 07.17.2024
+Version 0.6 - 07.17.2024
 	Variables Rewrite
-
+	Bugfixing
 
 
 #>
@@ -63,7 +63,7 @@ Set-Location $templateFilePathFolder
 
 # Run Install Command
 try {
-   Start-Process -FilePath $LocalFilePath -Wait -ArgumentList $CommandLineArgs -Wait -Passthru
+   Start-Process -FilePath $LocalFilePath -ArgumentList $CommandLineArgs -Wait -Passthru
     if (Test-Path $LocalDetectionExe) {
          Write-host "AVD CUSTOM IMAGE TEMPLATE - Installation Completed $SoftwareName $((Get-Date).ToUniversalTime()) "
     }
