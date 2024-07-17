@@ -16,7 +16,10 @@
 
 
 Version 0.1 - 07.16.2024
-First Draft PoC
+	First Draft PoC
+Version 0.4 - 07.17.2024
+	Variables Rewrite
+
 
 
 #>
@@ -44,7 +47,7 @@ $LocalFilePath = "$templateFilePathFolder\AcroRdrDC2400220857_en_US.exe"
 $CommandLineArgs = "/sAll /rs /rps /silent /norestart /msi DISABLE_ARM_SERVICE_INSTALL=1"
 $LocalDetectionExe = "C:\Program Files\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe"
 
-
+Write-Log "Starting AVD CUSTOM IMAGE TEMPLATE - CUSTOM SOFTWARE INSTALLATION: $SoftwareName"
 Write-host "Starting AVD CUSTOM IMAGE TEMPLATE - CUSTOM SOFTWARE INSTALLATION: $SoftwareName : $((Get-Date).ToUniversalTime()) "
 
 
@@ -55,6 +58,8 @@ if (-Not (Test-Path -Path $templateFilePathFolder -ErrorAction SilentlyContinue)
 
 # Download Software
 try {
+    Write-Log "Downloading $SoftwareName from $DownloadLink"
+    Write-host "AVD CUSTOM IMAGE TEMPLATE - Downloading $SoftwareName from $DownloadLink : $((Get-Date).ToUniversalTime()) "
     Invoke-WebRequest -Uri $DownloadLink -OutFile $LocalFilePath
     Write-Log "Downloaded $SoftwareName successfully."
     Write-host "AVD CUSTOM IMAGE TEMPLATE - Downloaded $SoftwareName successfully: $SoftwareName : $((Get-Date).ToUniversalTime()) "
@@ -62,10 +67,12 @@ try {
 catch {
     $ErrorMessage = $_.Exception.Message
     Write-Log "Error downloading $SoftwareName : $ErrorMessage"
-    Write-host "AVD CUSTOM IMAGE TEMPLATE - Error downloading $SoftwareName : $((Get-Date).ToUniversalTime()) "
+    Write-host "AVD CUSTOM IMAGE TEMPLATE - Error downloading $SoftwareName : $SoftwareName : $((Get-Date).ToUniversalTime()) "
     exit 1
 }
+
 Set-Location $templateFilePathFolder
+
 # Run Install Command
 try {
    Start-Process -FilePath $LocalFilePath -Wait -ArgumentList $CommandLineArgs -Wait -Passthru
