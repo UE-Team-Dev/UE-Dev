@@ -17,7 +17,7 @@
 
 Version 0.1 - 07.16.2024
 	First Draft PoC
-Version 0.6 - 07.17.2024
+Version 1.0 - 07.17.2024
 	Variables Rewrite
 	Bugfixing
 
@@ -64,12 +64,6 @@ Set-Location $templateFilePathFolder
 # Run Install Command
 try {
    Start-Process -FilePath $LocalFilePath -ArgumentList $CommandLineArgs -Wait -Passthru
-    if (Test-Path $LocalDetectionExe) {
-         Write-host "AVD CUSTOM IMAGE TEMPLATE - Installation Completed $SoftwareName $((Get-Date).ToUniversalTime()) "
-    }
-    else {
-        Write-host "AVD CUSTOM IMAGE TEMPLATE - Error detecting $SoftwareName after installation $SoftwareName $((Get-Date).ToUniversalTime()) "
-    }
 }
 catch {
     $ErrorMessage = $_.Exception.Message
