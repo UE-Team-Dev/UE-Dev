@@ -3,7 +3,7 @@
  
  Created on:    07.16.2024
  Created by:    Gian Mattia Lolli
- Version:       0.6
+ Version:       1.0
  Mail:          gianmattia.lolli@4wardpro.it
  
  Function:      Custom install wrapper for AVD Custom Image Templates
@@ -71,3 +71,4 @@ catch {
     Write-host "AVD CUSTOM IMAGE TEMPLATE - $ErrorMessage $((Get-Date).ToUniversalTime()) "
     exit 1
 }
+Write-host "AVD CUSTOM IMAGE TEMPLATE - Installation Completed $((Get-Date).ToUniversalTime()) "
