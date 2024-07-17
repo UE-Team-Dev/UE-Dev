@@ -47,8 +47,8 @@ $LocalFilePath = "$templateFilePathFolder\AcroRdrDC2400220857_en_US.exe"
 $CommandLineArgs = "/sAll /rs /rps /silent /norestart /msi DISABLE_ARM_SERVICE_INSTALL=1"
 $LocalDetectionExe = "C:\Program Files\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe"
 
-Write-Log "Starting AVD CUSTOM IMAGE TEMPLATE - CUSTOM SOFTWARE INSTALLATION: $SoftwareName"
-Write-host "Starting AVD CUSTOM IMAGE TEMPLATE - CUSTOM SOFTWARE INSTALLATION: $SoftwareName : $((Get-Date).ToUniversalTime()) "
+Write-Log "Starting AVD CUSTOM IMAGE TEMPLATE - CUSTOM SOFTWARE INSTALLATION $SoftwareName"
+Write-host "Starting AVD CUSTOM IMAGE TEMPLATE - CUSTOM SOFTWARE INSTALLATION $SoftwareName $((Get-Date).ToUniversalTime()) "
 
 
 # Local Folder creation
@@ -59,15 +59,15 @@ if (-Not (Test-Path -Path $templateFilePathFolder -ErrorAction SilentlyContinue)
 # Download Software
 try {
     Write-Log "Downloading $SoftwareName from $DownloadLink"
-    Write-host "AVD CUSTOM IMAGE TEMPLATE - Downloading $SoftwareName from $DownloadLink : $((Get-Date).ToUniversalTime()) "
+    Write-host "AVD CUSTOM IMAGE TEMPLATE - Downloading from $DownloadLink $((Get-Date).ToUniversalTime()) "
     Invoke-WebRequest -Uri $DownloadLink -OutFile $LocalFilePath
     Write-Log "Downloaded $SoftwareName successfully."
-    Write-host "AVD CUSTOM IMAGE TEMPLATE - Downloaded $SoftwareName successfully: $SoftwareName : $((Get-Date).ToUniversalTime()) "
+    Write-host "AVD CUSTOM IMAGE TEMPLATE - Downloaded successfully $((Get-Date).ToUniversalTime()) "
 }
 catch {
     $ErrorMessage = $_.Exception.Message
-    Write-Log "Error downloading $SoftwareName : $ErrorMessage"
-    Write-host "AVD CUSTOM IMAGE TEMPLATE - Error downloading $SoftwareName : $SoftwareName : $((Get-Date).ToUniversalTime()) "
+    Write-Log "Error downloading $ErrorMessage"
+    Write-host "AVD CUSTOM IMAGE TEMPLATE - Error downloading $SoftwareName $((Get-Date).ToUniversalTime()) "
     exit 1
 }
 
@@ -78,16 +78,16 @@ try {
    Start-Process -FilePath $LocalFilePath -Wait -ArgumentList $CommandLineArgs -Wait -Passthru
     if (Test-Path $LocalDetectionExe) {
         Write-Log "$SoftwareName has been installed successfully."
-        Write-host "AVD CUSTOM IMAGE TEMPLATE - Installation Completed: $SoftwareName : $((Get-Date).ToUniversalTime()) "
+        Write-host "AVD CUSTOM IMAGE TEMPLATE - Installation Completed $SoftwareName $((Get-Date).ToUniversalTime()) "
     }
     else {
         Write-Log "Error detecting $SoftwareName after installation."
-        Write-host "AVD CUSTOM IMAGE TEMPLATE - Error detecting $SoftwareName after installation: $SoftwareName : $((Get-Date).ToUniversalTime()) "
+        Write-host "AVD CUSTOM IMAGE TEMPLATE - Error detecting $SoftwareName after installation $SoftwareName $((Get-Date).ToUniversalTime()) "
     }
 }
 catch {
     $ErrorMessage = $_.Exception.Message
-    Write-Log "Error installing $SoftwareName : $ErrorMessage"
-    Write-host "AVD CUSTOM IMAGE TEMPLATE - Error during Installation: $SoftwareName : $((Get-Date).ToUniversalTime()) "
+    Write-Log "Error installing $SoftwareName $ErrorMessage"
+    Write-host "AVD CUSTOM IMAGE TEMPLATE - Error during Installation $SoftwareName $((Get-Date).ToUniversalTime()) "
     exit 1
 }
